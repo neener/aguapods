@@ -97,9 +97,9 @@ function init() {
 
 		sphereMesh.scale.x = sphereMesh.scale.y = sphereMesh.scale.z = 1;
 		sphereMesh.clickURL = "https://www.youtube.com/watch?v=TbZmVfs7MiM";
-
+		
 		objects.push( sphereMesh );
-
+		
 		scene.add( sphereMesh );
 
 	}
@@ -160,7 +160,8 @@ function onDocumentMouseDown( event ) {
 	// raycaster.setFromCamera( mouse, camera );
 
 	var intersects = raycaster.intersectObjects( scene.children );
-	intersects[0].clickUrl
+	window.location = intersects[0].clickUrl
+	
 }
 
 function render() {
@@ -191,4 +192,3 @@ function render() {
 }
 
 window.requestAnimationFrame(render);
-window.location = intersects[0].clickUrl
