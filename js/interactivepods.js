@@ -6,7 +6,6 @@ var pointLight;
 
 var sphere, spheretexture, sphereMesh, material;
 
-var mouse;
 init();
 
 
@@ -87,7 +86,8 @@ function init() {
 		// sphereMesh.rotation.y = degrees * (Math.PI / 180);
 
 		sphereMesh.scale.x = sphereMesh.scale.y = sphereMesh.scale.z = 1;
-		sphereMesh.clickURL = "http://youtu.be/TbZmVfs7MiM";
+		
+		// sphereMesh.clickURL = "http://youtu.be/TbZmVfs7MiM";
 		
 
 		objects.push( sphereMesh );
@@ -133,9 +133,9 @@ function onDocumentMouseDown(event){
 	vector.unproject(camera);
 
 	raycaster.set(camera.position, vector.sub(camera.position).normalize());
-
+	
 	var intersects = raycaster.intersectObjects(scene.children, false);
-	window.location = intersects[0].clickUrl;
+	window.location = "http://youtu.be/TbZmVfs7MiM";
 
 	if (intersects.length > 0){
 		console.log('object is selected!');
