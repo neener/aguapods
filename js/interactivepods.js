@@ -6,9 +6,7 @@ var pointLight;
 
 var sphere, spheretexture, sphereMesh, material;
 
-var raycaster;
 var mouse;
-
 init();
 
 
@@ -84,23 +82,16 @@ function init() {
 
 		sphereMesh = new THREE.Mesh( sphere, material );
 
+		// var degrees=25;
 
-		sphereMesh.rotation.z = 0;
-
-		// sphereMesh.position.x = Math.random() * 1000 - 500;
-		// sphereMesh.position.y = Math.random() * 1000 - 500;
-		// sphereMesh.position.z = Math.random() * 1000 - 500;
-
-		// sphereMesh.rotation.x = Math.random() * 200 - 100;
-		// sphereMesh.rotation.y = Math.random() * 200 - 100;
-		// sphereMesh.rotation.z = Math.random() * 200 - 100;
+		// sphereMesh.rotation.y = degrees * (Math.PI / 180);
 
 		sphereMesh.scale.x = sphereMesh.scale.y = sphereMesh.scale.z = 1;
-
-		sphereMesh.clickURL = "https://www.youtube.com/watch?v=TbZmVfs7MiM";
+		sphereMesh.clickURL = "http://youtu.be/TbZmVfs7MiM";
+		
 
 		objects.push( sphereMesh );
-
+		
 		scene.add( sphereMesh );
 
 	}
@@ -120,18 +111,39 @@ function init() {
 	pointLight = new THREE.PointLight( 0xff0000, 1 );
 	scene.add( pointLight );
 
-	// clickability
-
-	raycaster = new THREE.Raycaster();
-	mouse = new THREE.Vector2();
-
 	document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-	document.addEventListener( 'touchstart', onDocumentMouseDown, false );
-
-
 	window.addEventListener( 'resize', onWindowResize, false );
 
 }
+
+
+
+function onDocumentMouseDown(event){
+	event.preventDefault();
+
+	var vector = new THREE.Vector3();
+	var raycaster = new THREE.Raycaster();
+	var dir = new THREE.Vector3();
+
+	vector.set(
+		( event.clientX / window.innerWidth ) * 2 - 1,
+		- (event.clientY / window.innerHeight ) * 2 + 1,
+		0.5 );
+
+	vector.unproject(camera);
+
+	raycaster.set(camera.position, vector.sub(camera.position).normalize());
+
+	var intersects = raycaster.intersectObjects(scene.children, false);
+	window.location = intersects[0].clickUrl;
+
+	if (intersects.length > 0){
+		console.log('object is selected!');
+	}
+}
+
+
+
 
 function onWindowResize() {
 
@@ -142,27 +154,28 @@ function onWindowResize() {
 
 }
 
-function onDocumentTouchStart( event ) {
+// function onDocumentTouchStart( event ) {
 
-	event.preventDefault();
+// 	event.preventDefault();
 
-	event.clientX = event.touches[0].clientX;
-	event.clientY = event.touches[0].clientY;
-	onDocumentMouseDown( event );
-}
+// 	event.clientX = event.touches[0].clientX;
+// 	event.clientY = event.touches[0].clientY;
+// 	onDocumentMouseDown( event );
+// }
 
-function onDocumentMouseDown( event ) {
+// function onDocumentMouseDown( event ) {
 
-	event.preventDefault();
+// 	event.preventDefault();
 
-	mouse.x = ( event.clientX / renderer.domElement.width ) * 2 - 1;
-	mouse.y = - ( event.clientY / renderer.domElement.height ) * 2 + 1;
+// 	mouse.x = ( event.clientX / renderer.domElement.width ) * 2 - 1;
+// 	mouse.y = - ( event.clientY / renderer.domElement.height ) * 2 + 1;
 
-	// raycaster.setFromCamera( mouse, camera );
+// 	// raycaster.setFromCamera( mouse, camera );
 
-	var intersects = raycaster.intersectObjects( scene.children );
-	window.location = intersects[0].clickUrl
-}
+// 	var intersects = raycaster.intersectObjects( scene.children );
+// 	window.open = intersects[0].clickUrl
+	
+// }
 
 function render() {
 
@@ -175,7 +188,6 @@ function render() {
 
 		
 		object.position.y = Math.sin( object.rotation.y ) * 200;
-
 
 	}
 
