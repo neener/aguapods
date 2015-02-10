@@ -135,8 +135,12 @@ function onDocumentMouseDown(event){
 	raycaster.set(camera.position, vector.sub(camera.position).normalize());
 	
 	var intersects = raycaster.intersectObjects(scene.children, false);
-	window.location = "http://youtu.be/TbZmVfs7MiM";
 
+	if(intersects[0]){
+		var modal = document.querySelector('#modal-text');
+
+		modal.setAttribute('class', 'modal--show');
+	}
 }
 
 function onWindowResize() {
