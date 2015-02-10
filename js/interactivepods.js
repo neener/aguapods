@@ -137,13 +137,7 @@ function onDocumentMouseDown(event){
 	var intersects = raycaster.intersectObjects(scene.children, false);
 	window.location = "http://youtu.be/TbZmVfs7MiM";
 
-	if (intersects.length > 0){
-		console.log('object is selected!');
-	}
 }
-
-
-
 
 function onWindowResize() {
 
@@ -153,29 +147,6 @@ function onWindowResize() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 
 }
-
-// function onDocumentTouchStart( event ) {
-
-// 	event.preventDefault();
-
-// 	event.clientX = event.touches[0].clientX;
-// 	event.clientY = event.touches[0].clientY;
-// 	onDocumentMouseDown( event );
-// }
-
-// function onDocumentMouseDown( event ) {
-
-// 	event.preventDefault();
-
-// 	mouse.x = ( event.clientX / renderer.domElement.width ) * 2 - 1;
-// 	mouse.y = - ( event.clientY / renderer.domElement.height ) * 2 + 1;
-
-// 	// raycaster.setFromCamera( mouse, camera );
-
-// 	var intersects = raycaster.intersectObjects( scene.children );
-// 	window.open = intersects[0].clickUrl
-	
-// }
 
 function render() {
 
